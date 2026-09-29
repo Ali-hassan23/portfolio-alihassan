@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+/*
+ * Brand tokens for the scroll-craft engine (public/scrollcraft/scrollcraft.css).
+ * Six colours, three faces. Light and warm: paper ground, warm ink, one
+ * burnt-orange accent that also lights the backdrop's highlights.
+ */
+:root {
+  --sc-canvas: #f4f1ea;
+  --sc-surface: #fbf9f4;
+  --sc-ink: #181611;
+  --sc-ink-soft: #5f5a50;
+  --sc-accent: #de4e1a;
+  --sc-accent-ink: #ffffff;
+
+  --sc-font-display: var(--font-archivo), "Archivo", system-ui, sans-serif;
+  --sc-font-text: var(--font-geist-sans), "Geist", system-ui, sans-serif;
+  --sc-font-mono: var(--font-geist-mono), "Geist Mono", ui-monospace, monospace;
+
+  /* Page-only tokens. */
+  --sand: #ebe5d9;
+  --line: color-mix(in oklab, var(--sc-ink) 12%, transparent);
+  --line-strong: color-mix(in oklab, var(--sc-ink) 22%, transparent);
+  --shadow-soft: 0 1px 0 rgb(255 255 255 / 0.7) inset, 0 18px 40px -24px rgb(60 44 20 / 0.28),
+    0 2px 6px -2px rgb(60 44 20 / 0.12);
+}
+
+@theme inline {
+  --color-background: var(--sc-canvas);
+  --color-foreground: var(--sc-ink);
+  --font-sans: var(--font-geist-sans);
+}

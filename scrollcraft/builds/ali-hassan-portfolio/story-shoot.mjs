@@ -33,7 +33,7 @@ page.on("console", (m) => m.type() === "error" && errors.push(m.text()));
 page.on("pageerror", (e) => errors.push(String(e)));
 page.on("requestfailed", (r) => errors.push(`failed: ${r.url()}`));
 
-await page.goto("http://localhost:3000", { waitUntil: "networkidle" });
+await page.goto(process.env.URL || "http://localhost:3001", { waitUntil: "networkidle" });
 await page.waitForTimeout(1200);
 
 const sections = await page.evaluate(() =>

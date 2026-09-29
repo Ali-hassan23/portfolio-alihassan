@@ -13,6 +13,8 @@ export function Work() {
               <p className="sc-label">{workSection.label}</p>
               <h2 className="sc-display sc-display--lg">{workSection.heading}</h2>
               <p className="sc-lede">{workSection.sub}</p>
+              {/* Phones only: the sphere sits under the heading and slides with the cards. */}
+              <div className="backdrop-slot backdrop-slot--work" data-backdrop-slot="3" aria-hidden="true" />
             </div>
             {/* <div className="work__desk">
               <Image src={media.desk} alt={`${personal.name} coding at a desk`} width={1000} height={1625} sizes="(max-width: 760px) 40vw, 18vw" />

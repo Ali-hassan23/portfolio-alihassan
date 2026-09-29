@@ -10,6 +10,8 @@ export function Experience() {
           <h2 className="sc-display sc-display--lg">{experienceSection.heading}</h2>
         </div>
 
+        {/* Phones only: the git graph, turned on its side, sits here. */}
+        <div className="backdrop-slot backdrop-slot--experience" data-backdrop-slot="5" aria-hidden="true" />
         <ol className="timeline" data-sc-reveal="down" data-sc-reveal-at="0.1 0.45">
           {experience.map((job) => (
             <li className="timeline__item" data-current={job.current ? "true" : undefined} key={job.org}>

@@ -10,6 +10,8 @@ export function Services() {
           <h2 className="sc-display sc-display--lg">{servicesSection.heading}</h2>
           <p className="sc-lede">{servicesSection.sub}</p>
         </div>
+        {/* Phones only: the stacked layers get their own space here. */}
+        <div className="backdrop-slot backdrop-slot--services" data-backdrop-slot="2" aria-hidden="true" />
         <ol className="services__list">
           {services.map((s, i) => (
             <li className="service" data-layer={i} key={s.title} data-sc-in>

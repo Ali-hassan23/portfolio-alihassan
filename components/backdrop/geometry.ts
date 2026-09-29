@@ -33,6 +33,8 @@ export type Geometry = {
   // About: x of the braces' inner edges (units from centre), so the backdrop
   // can size them to wrap the real video window.
   braceInner: number;
+  // Hero: x of the brackets' inner edges, so they can be spaced around the head.
+  heroInner: number;
 };
 
 function mulberry32(seed: number) {
@@ -155,16 +157,18 @@ export function buildGeometry(n: number, monoFamily: string): Geometry {
   const font = `700 360px ${monoFamily}`;
   const depth = 0.2; // extrusion of the glyph states, so they have a front and a back
 
-  // 0. Hero: </> with the slash in the accent colour.
+  // 0. Hero: </> with the slash in the accent colour. The brackets stand
+  // well apart so the head fits between them; the slash passes behind it.
+  let heroInner = 1;
   {
     const lt = rasterGlyph("<", font);
     const sl = rasterGlyph("/", font);
     const gt = rasterGlyph(">", font);
     const H = 2.2;
     const parts = [
-      { g: lt, dx: -1.35, share: 0.36, hl: 0 },
+      { g: lt, dx: -1.7, share: 0.36, hl: 0 },
       { g: sl, dx: 0, share: 0.28, hl: 1 },
-      { g: gt, dx: 1.35, share: 0.36, hl: 0 },
+      { g: gt, dx: 1.7, share: 0.36, hl: 0 },
     ];
     let i = 0;
     parts.forEach((p, idx) => {
@@ -175,6 +179,9 @@ export function buildGeometry(n: number, monoFamily: string): Geometry {
         baseHighlight[STATE_HERO][i] = p.hl;
       }
     });
+    let minX = Infinity;
+    for (let k = 0; k < gt.count; k++) minX = Math.min(minX, gt.x[k]);
+    heroInner = 1.7 + minX * H;
   }
 
   // 1. About: { } opened wide, so the video window sits between the braces.
@@ -317,5 +324,5 @@ export function buildGeometry(n: number, monoFamily: string): Geometry {
     }
   }
 
-  return { n, states, baseHighlight, jitter, layerOf, nodeOf, edgeOf, edgeT, nodes, commits, head, braceInner };
+  return { n, states, baseHighlight, jitter, layerOf, nodeOf, edgeOf, edgeT, nodes, commits, head, braceInner, heroInner };
 }

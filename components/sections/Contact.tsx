@@ -27,6 +27,8 @@ export function Contact() {
           <SocialLinks />
         </div>
 
+        {/* Phones only: the @ sits between the invitation and the form. */}
+        <div className="backdrop-slot backdrop-slot--contact" data-backdrop-slot="6" aria-hidden="true" />
         <form className="contact-form" action={formAction} data-sc-in data-sc-stagger="60">
           <div className="contact-form__row">
             <label className="contact-form__field">

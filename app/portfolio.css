@@ -346,7 +346,7 @@
   display: grid;
   grid-template-columns: 3.5rem 1fr;
   gap: 1rem;
-  padding: 1.8rem 0;
+  padding: 6rem 0;
   border-bottom: 1px solid var(--line);
 }
 .service__index {
@@ -740,9 +740,19 @@
     margin-top: 1.5rem;
   }
   .hero__actions .text-link { flex-basis: 100%; }
+  /* The tags ride on the portrait, so their box matches it on phones too. */
+  .hero__chips {
+    right: auto;
+    left: calc(50% - min(46vw, 13rem));
+    width: min(92vw, 26rem);
+    height: auto;
+  }
 
   .about__inner { grid-template-columns: 1fr; }
-  .about__window { width: min(17rem, 78%); }
+  /* Phones: read about Ali first, then see the clip. */
+  .about__window { order: 2; }
+  /* Narrow enough that the { } around it stay on screen. */
+  .about__window { width: min(14rem, 56vw); }
   .facts__row { grid-template-columns: 7.5rem 1fr; }
 
   .service { grid-template-columns: 2.5rem 1fr; padding: 1.4rem 0; }
@@ -752,7 +762,7 @@
   .work__lead { flex-direction: column; align-items: flex-start; gap: 1.25rem; }
   .work__lead-copy { width: 78vw; }
   .work__desk { width: 9rem; }
-  .project { width: 84vw; height: min(40rem, calc(100svh - 7rem)); }
+  .project { width: 84vw; }
   .project__line { -webkit-line-clamp: 3; line-clamp: 3; }
   .project__facts .project__approach { display: none; }
   .project__body { padding: 1rem 1.1rem 1.1rem; }
@@ -765,9 +775,86 @@
   .contact-form__row { grid-template-columns: 1fr; }
 }
 
-/* Tall phones: room above the steps for the pipeline drawn behind them. */
-@media (max-width: 760px) and (min-height: 760px) {
-  .process__inner { padding-top: 7rem; }
+/* ------------------------------------------------ phones: backdrop slots --
+   On phones there is no empty column for the backdrop, so each section keeps
+   a slot where its shape sits, like a figure, instead of hiding behind text. */
+.backdrop-slot { display: none; }
+@media (max-width: 760px) {
+  .backdrop-slot { display: block; width: 100%; pointer-events: none; }
+  /* Services: the stack pins mid-screen and the four services scroll up over
+     it as frosted cards; the layer under the card being read lights up. */
+  .backdrop-slot--services {
+    position: sticky;
+    top: calc(50svh - 34vw);
+    height: 68vw;
+    margin-top: 0.5rem;
+    z-index: 0;
+  }
+  .backdrop-slot--work { height: 58vw; margin-top: 1rem; }
+  .backdrop-slot--process { height: clamp(4.5rem, 22vw, 6.5rem); margin-bottom: 0.75rem; }
+  .backdrop-slot--experience { height: 34vw; margin-top: 1.75rem; }
+  .backdrop-slot--contact { height: 58vw; margin-top: 1.5rem; }
+  .services__list {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    gap: 32svh;
+    /* Pulled up over the stack, so the cards scroll across it. The stack keeps
+       its own height, so it un-pins exactly at the end of its section. */
+    margin-top: -68vw;
+    padding: 76vw 0 14svh;
+    border-top: 0;
+  }
+  .services__list .service {
+    padding: 1.1rem 1.15rem 1.2rem;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    background: color-mix(in oklab, var(--sc-canvas) 80%, transparent);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    box-shadow: var(--shadow-soft);
+    transition: border-color 240ms var(--sc-ease-out);
+  }
+  .services__list .service[data-active="true"] { border-color: color-mix(in oklab, var(--sc-accent) 45%, transparent); }
+  .timeline { margin-top: 1.75rem; }
+  .contact-form { margin-top: 1.5rem; }
+}
+@media (max-width: 760px) and (max-height: 700px) {
+  /* Short phones: the pinned steps must fit one screen, so only the active
+     step shows its description. */
+  .process .process__head .sc-lede { display: none; }
+  .process__stage { align-items: flex-start; }
+  .steps__item:not([data-state="active"]) .steps__text { display: none; }
+  .steps__item { padding-block: 0.55rem; }
+}
+
+/* ---------------------------------------------- phones: projects slider --
+   Phones swipe through the projects instead of scrolling a pinned rail.
+   The engine still writes the pinned height and the rail transform, so both
+   are overridden here. */
+@media (max-width: 760px) {
+  .work { height: auto !important; padding-block: 4.5rem 3.5rem; background: color-mix(in oklab, var(--sand) 62%, transparent); }
+  .work .work__stage {
+    position: relative;
+    height: auto;
+    display: block;
+    overflow-x: auto;
+    overflow-y: hidden;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--sc-gutter);
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .work .work__stage::-webkit-scrollbar { display: none; }
+  .work .work__rail {
+    transform: none !important;
+    align-items: stretch;
+    padding: 0.5rem var(--sc-gutter) 1.5rem;
+  }
+  .work__rail > * { scroll-snap-align: start; }
+  .work__lead { align-self: center; }
+  .project { height: 36rem; }
 }
 
 /* Short phones: the same card size, with tighter text limits. */

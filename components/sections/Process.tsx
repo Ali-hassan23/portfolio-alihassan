@@ -7,6 +7,8 @@ export function Process() {
     <section id="process" className="process" data-sc-act="pin" data-sc-span="3.4" data-stage-anchor>
       <div data-sc-stage className="process__stage">
         <div className="sc-wrap process__inner">
+          {/* Phones only: the pipeline sits above the heading. */}
+          <div className="backdrop-slot backdrop-slot--process" data-backdrop-slot="4" aria-hidden="true" />
           <div className="process__head">
             <p className="sc-label">{process.label}</p>
             <h2 className="sc-display sc-display--lg">{process.heading}</h2>

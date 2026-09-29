@@ -68,7 +68,7 @@ export const hero = {
   sub: "Software engineer with over 3 years of experience. I design and ship full-stack web apps, automations, and AI systems, from the first sketch to the version people use every day.",
   workLink: "See my work",
   // Small tags that float in front of your portrait. Keep them short.
-  chips: ["Next.js", "AI agents", "Automations"],
+  chips: ["AI agents" , "Workflows", "Automations"],
 };
 
 export const about = {

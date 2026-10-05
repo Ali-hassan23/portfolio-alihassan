@@ -34,7 +34,7 @@ export const personal = {
   availability: "Available for new projects",
   // PLACEHOLDER: drop your CV into /public (for example /public/Ali-Hassan-CV.pdf) and put its path here.
   // While this is empty the "Download CV" buttons stay hidden.
-  cv: "",
+  cv: "/Ali-Hassan-CV.pdf",
   // Shown as icons in the Contact section and the footer. Entries with an empty url are hidden.
   // `icon` must be one of: linkedin, x, instagram, github.
   social: [
@@ -49,7 +49,7 @@ export const personal = {
 export const cta = {
   // Used everywhere: nav, hero, work, contact. Keep this one label consistent.
   label: "Start a Project",
-  cv: "Download CV",
+  cv: "View Resume",
 };
 
 // The top navigation. `id` must match a section id below.
@@ -325,7 +325,6 @@ export const contact = {
     name: "Name",
     email: "Email",
     projectType: "What are you building?",
-    budget: "Budget",
     message: "Where is it stuck?",
   },
   sending: "Sending",

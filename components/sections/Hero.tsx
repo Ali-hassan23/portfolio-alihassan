@@ -20,7 +20,7 @@ export function Hero() {
               {cta.label}
             </a>
             {personal.cv ? (
-              <a className="btn btn--ghost" href={personal.cv} download>
+              <a className="btn btn--ghost" href={personal.cv} target="_blank" rel="noopener noreferrer">
                 {cta.cv}
               </a>
             ) : null}

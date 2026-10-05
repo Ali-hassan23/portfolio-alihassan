@@ -40,16 +40,10 @@ export function Contact() {
               <input type="email" name="email" autoComplete="email" required />
             </label>
           </div>
-          <div className="contact-form__row">
-            <label className="contact-form__field">
-              <span>{contact.fields.projectType}</span>
-              <input type="text" name="projectType" />
-            </label>
-            <label className="contact-form__field">
-              <span>{contact.fields.budget}</span>
-              <input type="text" name="budget" />
-            </label>
-          </div>
+          <label className="contact-form__field">
+            <span>{contact.fields.projectType}</span>
+            <input type="text" name="projectType" />
+          </label>
           <label className="contact-form__field">
             <span>{contact.fields.message}</span>
             <textarea name="message" rows={4} required />

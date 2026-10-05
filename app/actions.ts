@@ -14,7 +14,6 @@ export async function sendContactMessage(
   const name = String(formData.get("name") || "").trim();
   const email = String(formData.get("email") || "").trim();
   const projectType = String(formData.get("projectType") || "").trim();
-  const budget = String(formData.get("budget") || "").trim();
   const message = String(formData.get("message") || "").trim();
 
   if (!name || !email || !message) {
@@ -49,7 +48,7 @@ export async function sendContactMessage(
         to: contact.recipientEmail,
         reply_to: email,
         subject: `New project inquiry from ${name}`,
-        text: `Name: ${name}\nEmail: ${email}\nProject type: ${projectType}\nBudget: ${budget}\n\n${message}`,
+        text: `Name: ${name}\nEmail: ${email}\nProject type: ${projectType}\n\n${message}`,
       }),
     });
 
